@@ -65,6 +65,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.C))
         {
             _animator.SetBool("Rolling",true);
+            _animator.SetBool("IsWalking", false);
+            _animator.SetBool("IsRunning", false);
         }
         else
         {
