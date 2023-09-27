@@ -8,11 +8,16 @@ public class PlayerMove : MonoBehaviour
     public Transform cam;
     private Animator _animator;
     private float Speed = 2f;
+
+    private Rigidbody karakterRigidbody;
+    private string key = "Paleyer";
+
     
     void Start()
     {
         _animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        karakterRigidbody = GetComponent<Rigidbody>();
     }
     
     void Update()
@@ -77,4 +82,35 @@ public class PlayerMove : MonoBehaviour
        
         #endregion
     }
+
+    #region Save
+    public void Kaydet()
+    {
+        //************ SAVE ************
+        
+        Vector3 position = transform.position;
+        PlayerPrefs.SetFloat(key + "_x", position.x);
+        PlayerPrefs.SetFloat(key + "_y", position.y);
+        PlayerPrefs.SetFloat(key + "_z", position.z);
+        PlayerPrefs.Save();
+        Debug.Log("Kaydedildi: " + position);
+    }
+
+    public void OyunuYukle()
+    {
+        //************ LOAD ************
+
+        float x = PlayerPrefs.GetFloat(key + "_x");
+        float y = PlayerPrefs.GetFloat(key + "_y");
+        float z = PlayerPrefs.GetFloat(key + "_z");
+        Vector3 position = new Vector3(x, y, z);
+        transform.position = position;
+
+        //Karakterin hareket etme sorununu çözen kodlar:
+        characterController.enabled = false;
+        characterController.enabled = true;
+
+        Debug.Log("Yüklendi: " + position);
+    }
+#endregion
 }
