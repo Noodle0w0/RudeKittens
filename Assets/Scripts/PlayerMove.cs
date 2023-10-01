@@ -11,8 +11,9 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody karakterRigidbody;
     private string key = "Paleyer";
-
     
+
+
     void Start()
     {
         _animator = GetComponent<Animator>();
